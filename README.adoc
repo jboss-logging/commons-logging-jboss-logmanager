@@ -1,0 +1,33 @@
+= Apache Commons Logging
+
+This is a fork of Apache Commons Logging based on version 1.2 which delegates
+to the JBoss Log Manager. The reason for the fork is to avoid caching class
+loaders and get around issues with retrieving class loaders if a security
+manager is used.
+
+## Implementation
+
+No configuration options are supported.
+
+The `LogFactory.setAttribute(String, Object)` is supported however the value
+type must be a string. The map will be cleared when the any of the
+`LogFactory.release()` methods are invoked.
+
+The `SimpleLog` and `NoOpLog` are available and should work if you use the
+implementations directly. However there is not much use in them. They were
+added only for possible compatibility issues.
+
+## Unsupported Operations
+
+Some of the operations, such as diagnostics logging, are not supported in
+this implementation.
+
+### The following operations are not supported:
+
+ * `LogFactory.getClassLoader(Class)`
+ * `LogFactory.getContextClassLoader()`
+ * `LogFactory.directGetContextClassLoader()`
+ * `LogFactory.newFactory(String, ClassLoader, ClassLoader)`
+ * `LogFactory.newFactory(String, ClassLoader)`
+ * `LogFactory.isDiagnosticsEnabled()`
+ * `LogFactory.logRawDiagnostic(String)`
