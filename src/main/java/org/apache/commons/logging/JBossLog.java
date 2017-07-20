@@ -19,6 +19,9 @@
 
 package org.apache.commons.logging;
 
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+
 import org.jboss.logmanager.Level;
 import org.jboss.logmanager.Logger;
 
@@ -27,11 +30,14 @@ import org.jboss.logmanager.Logger;
  *
  * @author <a href="mailto:jperkins@redhat.com">James R. Perkins</a>
  */
-class JBossLog implements Log {
-    private final Logger delegate;
+class JBossLog implements Log, Serializable {
+    private static final long serialVersionUID = 7757100415375072992L;
+    private final String name;
+    private final transient Logger delegate;
 
     JBossLog(final Logger delegate) {
         this.delegate = delegate;
+        this.name = delegate.getName();
     }
 
     @Override
@@ -135,5 +141,9 @@ class JBossLog implements Log {
         } else {
             delegate.log(level, msg, t);
         }
+    }
+
+    private Object readResolve() throws ObjectStreamException {
+        return LogFactory.getLog(name);
     }
 }
