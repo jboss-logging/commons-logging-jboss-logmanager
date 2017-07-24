@@ -64,6 +64,20 @@ public class LogTest {
     }
 
     @Test
+    public void testCallStack() throws Exception {
+        final Log log = LogFactory.getLog(LogTest.class);
+        Assert.assertTrue(log instanceof JBossLog);
+        log.info("Test message");
+        final ExtLogRecord record = handler.queue.poll();
+        Assert.assertNotNull(record);
+        Assert.assertEquals(LogTest.class.getName(), record.getSourceClassName());
+        Assert.assertEquals("LogTest.java", record.getSourceFileName());
+        Assert.assertEquals("testCallStack", record.getSourceMethodName());
+        // Note this is a bit fragile as any added lines to this test may throw this number off
+        Assert.assertEquals(70, record.getSourceLineNumber());
+    }
+
+    @Test
     public void testLogLevels() throws Exception {
         final Log log = LogFactory.getLog(LogTest.class);
         final String msg = "Test log level";
@@ -122,6 +136,8 @@ public class LogTest {
 
         @Override
         protected void doPublish(final ExtLogRecord record) {
+            // Ensures the caller is calculated for testing
+            record.copyAll();
             queue.addLast(record);
         }
 

@@ -22,6 +22,7 @@ package org.apache.commons.logging;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 
+import org.jboss.logmanager.ExtLogRecord;
 import org.jboss.logmanager.Level;
 import org.jboss.logmanager.Logger;
 
@@ -32,6 +33,7 @@ import org.jboss.logmanager.Logger;
  */
 class JBossLog implements Log, Serializable {
     private static final long serialVersionUID = 7757100415375072992L;
+    private static final String LOGGER_CLASS_NAME = JBossLog.class.getName();
     private final String name;
     private final transient Logger delegate;
 
@@ -136,11 +138,9 @@ class JBossLog implements Log, Serializable {
 
     private void log(final Level level, final Object message, final Throwable t) {
         final String msg = String.valueOf(message);
-        if (t == null) {
-            delegate.log(level, msg);
-        } else {
-            delegate.log(level, msg, t);
-        }
+        final ExtLogRecord record = new ExtLogRecord(level, msg, LOGGER_CLASS_NAME);
+        record.setThrown(t);
+        delegate.log(record);
     }
 
     private Object readResolve() throws ObjectStreamException {
