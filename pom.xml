@@ -25,7 +25,7 @@
 
     <groupId>org.jboss.logmanager</groupId>
     <artifactId>commons-logging-jboss-logmanager</artifactId>
-    <version>1.0.2.Final</version>
+    <version>1.0.3.Final-SNAPSHOT</version>
 
     <name>Commons Logging to JBoss Log Manager</name>
     <url>http://www.jboss.org</url>
