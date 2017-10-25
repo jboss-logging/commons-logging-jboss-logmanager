@@ -36,7 +36,7 @@ import org.jboss.logmanager.Logger.AttachmentKey;
  *
  * @author <a href="mailto:jperkins@redhat.com">James R. Perkins</a>
  */
-class JBossLogFactory extends LogFactory {
+public class JBossLogFactory extends LogFactory {
     private static final Collection<String> UNSUPPORTED_PROPERTIES = Arrays.asList(
             LogFactory.FACTORY_PROPERTY,
             "org.apache.commons.org.apache.commons.logging.Log",
