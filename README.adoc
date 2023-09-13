@@ -5,7 +5,19 @@ to the JBoss Log Manager. The reason for the fork is to avoid caching class
 loaders and get around issues with retrieving class loaders if a security
 manager is used.
 
-## Implementation
+== Usage
+
+=== Maven
+[source,xml]
+----
+<dependency>
+    <groupId>org.jboss.logmanager</groupId>
+    <artifactId>jboss-commons-logging-jboss-logmanager</artifactId>
+    <version>${version.org.jboss.commons-logging-jboss-logmanager}</version>
+</dependency>
+----
+
+== Implementation
 
 No configuration options are supported.
 
@@ -17,12 +29,12 @@ The `SimpleLog` and `NoOpLog` are available and should work if you use the
 implementations directly. However there is not much use in them. They were
 added only for possible compatibility issues.
 
-## Unsupported Operations
+== Unsupported Operations
 
 Some of the operations, such as diagnostics logging, are not supported in
 this implementation.
 
-### The following operations are not supported:
+=== The following operations are not supported:
 
  * `LogFactory.getClassLoader(Class)`
  * `LogFactory.getContextClassLoader()`
@@ -31,3 +43,7 @@ this implementation.
  * `LogFactory.newFactory(String, ClassLoader)`
  * `LogFactory.isDiagnosticsEnabled()`
  * `LogFactory.logRawDiagnostic(String)`
+
+== Contributing
+
+See the link:CONTRIBUTING.adoc[contributing guide].
