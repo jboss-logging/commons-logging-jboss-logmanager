@@ -23,40 +23,37 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.jboss.logging</groupId>
+        <artifactId>logging-parent</artifactId>
+        <version>1.0.1.Final</version>
+    </parent>
+
     <groupId>org.jboss.logmanager</groupId>
     <artifactId>commons-logging-jboss-logmanager</artifactId>
     <version>2.0.0.Final-SNAPSHOT</version>
 
-    <name>Commons Logging to JBoss Log Manager</name>
-    <url>http://www.jboss.org</url>
-    <description>An Apache Commons Logging implementation for JBoss Log Manager</description>
-
-    <parent>
-        <groupId>org.jboss</groupId>
-        <artifactId>jboss-parent</artifactId>
-        <version>18</version>
-    </parent>
-
-    <scm>
-        <connection>scm:git:git://github.com/jboss-logging/commons-logging-jboss-logmanager.git</connection>
-        <url>https://github.com/jboss-logging/commons-logging-jboss-logmanager</url>
-    </scm>
-
     <licenses>
         <license>
             <name>Apache License 2.0</name>
-            <url>http://repository.jboss.org/licenses/apache-2.0.txt</url>
+            <url>https://repository.jboss.org/licenses/apache-2.0.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+
+    <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false"
+         child.scm.url.inherit.append.path="false">
+        <connection>scm:git:git://github.com/jboss-logging/commons-logging-jboss-logmanager.git</connection>
+        <developerConnection>scm:git:git@github.com:jboss-logging/commons-logging-jboss-logmanager.git</developerConnection>
+        <url>https://github.com/jboss-logging/commons-logging-jboss-logmanager/tree/main/</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <properties>
         <version.commons-logging>1.2</version.commons-logging>
         <version.junit>4.12</version.junit>
         <version.org.jboss.logmanager.jboss-logmanager>1.5.4.Final</version.org.jboss.logmanager.jboss-logmanager>
-
-        <maven.compiler.target>1.6</maven.compiler.target>
-        <maven.compiler.source>1.6</maven.compiler.source>
     </properties>
 
     <dependencies>
