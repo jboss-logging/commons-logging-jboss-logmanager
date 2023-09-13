@@ -39,7 +39,7 @@ public class LogFactoryTest {
     public void testAttributes() {
         final LogFactory logFactory = LogFactory.getFactory();
         logFactory.setAttribute("test1", "value1");
-        Assert.assertArrayEquals(new String[] {"test1"}, logFactory.getAttributeNames());
+        Assert.assertArrayEquals(new String[] { "test1" }, logFactory.getAttributeNames());
         Assert.assertEquals("value1", logFactory.getAttribute("test1"));
         logFactory.removeAttribute("test1");
         Assert.assertEquals(0, logFactory.getAttributeNames().length);

@@ -40,8 +40,7 @@ public class JBossLogFactory extends LogFactory {
     private static final Collection<String> UNSUPPORTED_PROPERTIES = Arrays.asList(
             LogFactory.FACTORY_PROPERTY,
             "org.apache.commons.org.apache.commons.logging.Log",
-            "org.apache.commons.org.apache.commons.logging.log"
-    );
+            "org.apache.commons.org.apache.commons.logging.log");
     private static final AttachmentKey<Log> LOG_KEY = new AttachmentKey<Log>();
     private static final AttachmentKey<Map<String, Object>> ATTRIBUTE_KEY = new AttachmentKey<Map<String, Object>>();
 
@@ -51,7 +50,6 @@ public class JBossLogFactory extends LogFactory {
     public Object getAttribute(final String name) {
         return getAttributeMap().get(name);
     }
-
 
     @Override
     @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
@@ -103,7 +101,9 @@ public class JBossLogFactory extends LogFactory {
             attributes.remove(name);
         } else {
             if (!(value instanceof String)) {
-                logger.log(Level.WARN, String.format("Attribute values must be of type java.lang.String. Attribute %s with value %s will be ignored.", name, value));
+                logger.log(Level.WARN, String.format(
+                        "Attribute values must be of type java.lang.String. Attribute %s with value %s will be ignored.", name,
+                        value));
             } else if (UNSUPPORTED_PROPERTIES.contains(name)) {
                 logger.log(Level.WARN, String.format("Attribute %s is not supported. Value %s will be ignored.", name, value));
             } else {

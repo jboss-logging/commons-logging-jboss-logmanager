@@ -24,7 +24,7 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 
 /**
- * Trivial implementation of Log that throws away all messages.  No
+ * Trivial implementation of Log that throws away all messages. No
  * configurable system properties are supported.
  *
  * @version $Id: NoOpLog.java 1432663 2013-01-13 17:24:18Z tn $

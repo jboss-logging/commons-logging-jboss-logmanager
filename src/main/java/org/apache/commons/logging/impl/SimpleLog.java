@@ -32,13 +32,13 @@ import org.apache.commons.logging.Log;
 
 /**
  * Simple implementation of Log that sends all enabled log messages,
- * for all defined loggers, to System.err.  The following system properties
+ * for all defined loggers, to System.err. The following system properties
  * are supported to configure the behavior of this logger:
  * <ul>
  * <li><code>org.apache.commons.org.apache.commons.logging.simplelog.defaultlog</code> -
  * Default org.apache.commons.logging detail level for all instances of SimpleLog.
  * Must be one of ("trace", "debug", "info", "warn", "error", or "fatal").
- * If not specified, defaults to "info". </li>
+ * If not specified, defaults to "info".</li>
  * <li><code>org.apache.commons.org.apache.commons.logging.simplelog.log.xxxxx</code> -
  * Logging detail level for a SimpleLog instance named "xxxxx".
  * Must be one of ("trace", "debug", "info", "warn", "error", or "fatal").
@@ -377,7 +377,7 @@ public class SimpleLog implements Log, Serializable {
 
     /**
      * Write the content of the message accumulated in the specified
-     * <code>StringBuffer</code> to the appropriate output destination.  The
+     * <code>StringBuffer</code> to the appropriate output destination. The
      * default implementation writes to <code>System.err</code>.
      *
      * @param buffer A <code>StringBuffer</code> containing the accumulated
@@ -645,4 +645,3 @@ public class SimpleLog implements Log, Serializable {
                 });
     }
 }
-
