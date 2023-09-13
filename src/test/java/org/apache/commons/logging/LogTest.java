@@ -26,10 +26,10 @@ import org.jboss.logmanager.ExtHandler;
 import org.jboss.logmanager.ExtLogRecord;
 import org.jboss.logmanager.Level;
 import org.jboss.logmanager.Logger;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author <a href="mailto:jperkins@redhat.com">James R. Perkins</a>
@@ -40,14 +40,14 @@ public class LogTest {
 
     private QueuedHandler handler;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         handler = new QueuedHandler();
         rootLogger.addHandler(handler);
         rootLogger.setLevel(Level.ALL);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         rootLogger.removeHandler(handler);
         handler.close();
@@ -56,25 +56,25 @@ public class LogTest {
     @Test
     public void testLogger() throws Exception {
         final Log log = LogFactory.getLog(LogTest.class);
-        Assert.assertTrue(log instanceof JBossLog);
+        Assertions.assertTrue(log instanceof JBossLog);
         log.info("Test message");
         final ExtLogRecord record = handler.queue.poll();
-        Assert.assertNotNull(record);
-        Assert.assertEquals("Test message", record.getMessage());
+        Assertions.assertNotNull(record);
+        Assertions.assertEquals("Test message", record.getMessage());
     }
 
     @Test
     public void testCallStack() throws Exception {
         final Log log = LogFactory.getLog(LogTest.class);
-        Assert.assertTrue(log instanceof JBossLog);
+        Assertions.assertTrue(log instanceof JBossLog);
         log.info("Test message");
         final ExtLogRecord record = handler.queue.poll();
-        Assert.assertNotNull(record);
-        Assert.assertEquals(LogTest.class.getName(), record.getSourceClassName());
-        Assert.assertEquals("LogTest.java", record.getSourceFileName());
-        Assert.assertEquals("testCallStack", record.getSourceMethodName());
+        Assertions.assertNotNull(record);
+        Assertions.assertEquals(LogTest.class.getName(), record.getSourceClassName());
+        Assertions.assertEquals("LogTest.java", record.getSourceFileName());
+        Assertions.assertEquals("testCallStack", record.getSourceMethodName());
         // Note this is a bit fragile as any added lines to this test may throw this number off
-        Assert.assertEquals(70, record.getSourceLineNumber());
+        Assertions.assertEquals(70, record.getSourceLineNumber());
     }
 
     @Test
@@ -105,15 +105,15 @@ public class LogTest {
         rootLogger.setLevel(level);
         logAllLevels(log, msg);
         final int expectedEntries = expectedOtherLogLevels.length + 1;
-        Assert.assertEquals(String.format("Expected %d log entries but found %d.", expectedEntries, handler.queue.size()),
-                expectedEntries, handler.queue.size());
+        Assertions.assertEquals(expectedEntries, handler.queue.size(),
+                () -> String.format("Expected %d log entries but found %d.", expectedEntries, handler.queue.size()));
         ExtLogRecord record = handler.queue.pollLast();
-        Assert.assertNotNull("Found a null record", record);
-        Assert.assertEquals(msg + " " + level.getName(), record.getMessage());
+        Assertions.assertNotNull(record, "Found a null record");
+        Assertions.assertEquals(msg + " " + level.getName(), record.getMessage());
         for (Level l : expectedOtherLogLevels) {
             record = handler.queue.poll();
-            Assert.assertNotNull("Found a null record", record);
-            Assert.assertEquals(msg + " " + l.getName(), record.getMessage());
+            Assertions.assertNotNull(record, "Found a null record");
+            Assertions.assertEquals(msg + " " + l.getName(), record.getMessage());
         }
     }
 
@@ -131,7 +131,7 @@ public class LogTest {
         final BlockingDeque<ExtLogRecord> queue;
 
         private QueuedHandler() {
-            queue = new LinkedBlockingDeque<ExtLogRecord>();
+            queue = new LinkedBlockingDeque<>();
         }
 
         @Override
