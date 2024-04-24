@@ -51,7 +51,7 @@
     </scm>
 
     <properties>
-        <version.org.jboss.logmanager.jboss-logmanager>3.0.2.Final</version.org.jboss.logmanager.jboss-logmanager>
+        <version.org.jboss.logmanager.jboss-logmanager>3.0.5.Final</version.org.jboss.logmanager.jboss-logmanager>
         <version.org.junit>5.10.2</version.org.junit>
     </properties>
     <dependencyManagement>
